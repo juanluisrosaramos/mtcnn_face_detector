@@ -8,15 +8,11 @@ This project provide a **single** tensorflow model implemented the mtcnn face de
   [original project](https://github.com/kpzhang93/MTCNN_face_detection_alignment).
 
 # Requirement
-- tensorflow >= 1.5.0 (older version may work as well, but it is not tested)
+- tensorflow >= 2
 - opencv python binding (for reading image and show the result)
-- pycaffe (optional, for convert model from caffe to tensorflow)
 
 # Run
 ```bash
-# simple detection demo
-python mtcnn.py test_image.jpg
-
 # for tensorflow 2.0
 python mtcnn_tfv2.py test_image.jpg
 
@@ -26,20 +22,6 @@ python mtcnn_tfv2.py test_image.jpg
 # small image data in a powerful server.
 python mtcnn_data.py imglist.txt result
 ```
-
-# Convert model
-The default model `mtcnn.pb` will work well. But if you want to modify the model's behave, you may need
-to convert the model yourself.
-```bash
-# download model from original project
-git clone https://github.com/kpzhang93/MTCNN_face_detection_alignment
-# convert model
-python caffe2tf.py MTCNN_face_detection_alignment/code/codes/MTCNNv1/model ./mtcnn.pb
-```
-
-# Result
-![result.jpg](./result.jpg)
-
 # Input and Ouput
 ## Input: 
  BGR image.
@@ -47,9 +29,3 @@ python caffe2tf.py MTCNN_face_detection_alignment/code/codes/MTCNNv1/model ./mtc
 - box: bouding box, 2D float tensor with format [[y1, x1, y2, x2], ...]
 - prob: confidence, 1D float tensor with format [x, ...]
 - landmarks: face landmarks, 2D float tensor with format[[y1, y2, y3, y4, y5, x1, x2, x3, x4, x5], ...]
-
-# Note
-- The mtcnn.pb is not compatible with tensorflow with version 1.12. You can use mtcnn_1.12.pb or consider to convert the model your self.
-- Because the model is designed to work with opencv, so the input image format is BGR instead of RGB. If 
-you prefer RGB, you can modify the convert script and convert the model yourself.
-- The convert code make the model more suitable for tensorflow and opencv by modifying the model's parameters. 
