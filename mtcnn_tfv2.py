@@ -46,15 +46,13 @@ def main(args):
         img = cv2.rectangle(img, (box[1], box[0]), (box[3], box[2]), (255, 0, 0), 3)
         pts = pts.astype('int32')        
         #Show landmarks
-        
+
         #2D float tensor with format[[y1, y2, y3, y4, y5, x1, x2, x3, x4, x5], ...]
         #left eye, right eye, nose, left mouth, right mouth
         for i in range(2):
             img = cv2.circle(img, (pts[i+5], pts[i]), 1, (0, 255, 0), 2)          
-    eyesCenter = ((pts[5] + pts[6]) // 2,(pts[0] + pts[1]) // 2)
-    
-    print('eyesCenter',eyesCenter)
-    img = cv2.circle(img, eyesCenter, 1, (255, 0, 0), 2)
+            eyesCenter = ((pts[5] + pts[6]) // 2,(pts[0] + pts[1]) // 2)        
+            img = cv2.circle(img, eyesCenter, 1, (255, 0, 0), 2)
     imgplot = plt.imshow(img)
     plt.show()
     #cv2.imshow('image', img)
